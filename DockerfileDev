@@ -1,0 +1,14 @@
+FROM golang:1.11-stretch
+RUN apt-get -qq update \
+   && apt-get -qq -y install curl sshpass nano
+WORKDIR /go/src/back
+COPY . .
+RUN rm -r ./apps
+RUN ["go", "get", "github.com/gorilla/mux"]
+RUN ["go", "get", "github.com/joho/godotenv"]
+RUN ["go", "get", "github.com/gorilla/handlers"]
+RUN ["go", "get", "github.com/githubnemo/CompileDaemon"]
+
+ENTRYPOINT CompileDaemon -log-prefix=false -build="go build ./main.go" -command="./main" -color=true -pattern="(.+\.go)$"
+
+EXPOSE 8080

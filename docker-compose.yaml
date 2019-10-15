@@ -1,0 +1,16 @@
+version: '3.5'
+services:
+  back:
+    build: .
+#    build:
+#      context: .
+#      dockerfile: DockerfileDev
+#    depends_on:
+#      - mongo
+#    volumes:
+#      - ./lib:/go/src/back/lib
+    ports:
+      - "8080:8080"
+    environment:
+      - Place=LocalIgor
+      - isDev=true
