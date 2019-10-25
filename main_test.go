@@ -1,8 +1,9 @@
 package main
 
 import (
+	sw "exp_with_go_lang/lib"
+	util "github.com/eagle7410/go_util/libs"
 	. "github.com/smartystreets/goconvey/convey"
-	sw "go_frame/lib"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -18,7 +19,7 @@ func TestCircle(t *testing.T) {
 
 	router := sw.GetRouter()
 
-	ts := httptest.NewServer(sw.LogRequest(router))
+	ts := httptest.NewServer(util.LogRequest(router))
 	defer ts.Close()
 
 	Convey("App run", t, func() {
